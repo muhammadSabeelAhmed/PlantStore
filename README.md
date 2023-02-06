@@ -1,10 +1,16 @@
-# firebaseapp
+# Plant Store
 
-A new Flutter project.
+Plant store with some screens 
 
-## Getting Started
+## Screens
 
-This project is a starting point for a Flutter application.
+* Splash
+* Getting Started
+* Login
+* Signup
+* Home Screen (Shop)
+* Product Details
+* Add to Cart
 
 A few resources to get you started if this is your first Flutter project:
 
