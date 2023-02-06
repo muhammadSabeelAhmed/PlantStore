@@ -70,7 +70,6 @@ class _CartViewState extends State<CartView> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Row(
-                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
