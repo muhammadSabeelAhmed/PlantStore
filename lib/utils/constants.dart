@@ -20,6 +20,10 @@ class StringConstants {
 
   static String banner1Head = "There’s a Plant\nfor everyone";
   static String banner1Desc = "Get your 1st plant\n@ 40% off";
+  static String bottomline1 = "Plant a Life";
+  static String bottomline2 = "Live amongst Living";
+  static String bottomline3 = "Spread the joy";
+
   static var selectedIndex = 0;
   static int total = 0;
   static var categories = [
@@ -39,6 +43,29 @@ class StringConstants {
     ImageContants.product3,
     ImageContants.product4,
     ImageContants.product5,
+    ImageContants.product1,
+    ImageContants.product2,
+    ImageContants.product3,
+    ImageContants.product4,
+    ImageContants.product5,
+    ImageContants.product1,
+    ImageContants.product2,
+    ImageContants.product3,
+    ImageContants.product4,
+    ImageContants.product5,
+    ImageContants.product1,
+    ImageContants.product2,
+    ImageContants.product3,
+    ImageContants.product4,
+    ImageContants.product5,
+  ];
+
+  static var productBackgrounds = [
+    ImageContants.product1bg,
+    ImageContants.product2bg,
+    ImageContants.product4bg,
+    ImageContants.product5bg,
+    ImageContants.product6bg,
   ];
 }
 
@@ -91,4 +118,10 @@ class ImageContants {
   static String water = "assets/images/water.png";
   static String light = "assets/images/light.png";
   static String fertilizer = "assets/images/fertilizer.png";
+
+  static String product1bg = "assets/images/p1bg.png";
+  static String product2bg = "assets/images/p2bg.png";
+  static String product4bg = "assets/images/p4bg.png";
+  static String product5bg = "assets/images/p5bg.png";
+  static String product6bg = "assets/images/p6bg.png";
 }

@@ -62,15 +62,58 @@ class HomePage extends StatelessWidget {
                             myProduct["light"],
                             myProduct["water"],
                             myProduct["rating"],
-                            myProduct["product_cat"]);
+                            myProduct["product_cat"],
+                            1);
                         return ItemsWidget(
-                            product, ColorConstants.productColors[i]);
+                            product, StringConstants.productBackgrounds[i]);
                       } else {
-                        return CircularProgressIndicator();
+                        return CircularProgressIndicator(value: 100);
                       }
                     });
               },
             ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              color: Color(ColorConstants.PrimaryColor),
+              width: 60,
+              height: 5,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Text(
+                StringConstants.bottomline1,
+                style: TextStyle(
+                    color: Color(ColorConstants.PrimaryColor),
+                    fontSize: 40,
+                    fontFamily: FontsConstants.Bold),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Text(
+                StringConstants.bottomline2,
+                style: TextStyle(
+                    color: Color(ColorConstants.PrimaryColor),
+                    fontSize: 35,
+                    fontFamily: FontsConstants.Bold),
+              ),
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: Text(
+                StringConstants.bottomline3,
+                style: TextStyle(
+                    color: Color(ColorConstants.PrimaryColor),
+                    fontSize: 28,
+                    fontFamily: FontsConstants.Bold),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            )
           ],
         ),
       ),

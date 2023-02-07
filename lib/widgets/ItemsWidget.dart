@@ -8,8 +8,23 @@ import '../utils/constants.dart';
 
 class ItemsWidget extends StatelessWidget {
   Product product;
-  int color;
-  ItemsWidget(this.product, this.color);
+  String bg;
+  ItemsWidget(this.product, this.bg);
+
+  addToCart(Product product, BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text("${product.name} added to Cart"),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          StringConstants.cartItems.remove(product);
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+    StringConstants.cartItems.add(product);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +32,7 @@ class ItemsWidget extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           height: 250,
-          decoration: BoxDecoration(
-            color: Color(color),
-            borderRadius: BorderRadius.circular(20),
-          ),
           child: InkWell(
             onTap: () {
               Navigator.push(
@@ -44,83 +54,86 @@ class ItemsWidget extends StatelessWidget {
                   ),
                 ),
                 Image.asset(
+                  bg,
+                ),
+                Image.asset(
                   ImageContants.productbg,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      product.product_cat.toUpperCase(),
-                      style: TextStyle(
-                          color: Color(ColorConstants.PrimaryColor),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        product.name,
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        product.product_cat.toUpperCase(),
                         style: TextStyle(
                             color: Color(ColorConstants.PrimaryColor),
-                            fontSize: 35,
-                            fontFamily: FontsConstants.Bold,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "\$ ${product.price}",
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 15),
+                        child: Text(
+                          product.name,
                           style: TextStyle(
                               color: Color(ColorConstants.PrimaryColor),
-                              fontSize: 25,
+                              fontSize: 35,
+                              fontFamily: FontsConstants.Bold,
                               fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Image.asset(
-                          ImageContants.fav,
-                          height: 30,
-                          width: 30,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            final snackBar = SnackBar(
-                              content: Text(
-                                  "${product.name} cost of ${product.name} added to Cart"),
-                              action: SnackBarAction(
-                                label: 'Undo',
-                                onPressed: () {
-                                  StringConstants.cartItems.remove(product);
-                                },
-                              ),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-
-                            StringConstants.cartItems.add(product);
-                          },
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Color(ColorConstants.GreenColor),
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Image.asset(
-                              ImageContants.cart,
-                              height: 40,
-                              width: 40,
-                            ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "\$ ${product.price}",
+                            style: TextStyle(
+                                color: Color(ColorConstants.PrimaryColor),
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold),
                           ),
-                        )
-                      ],
-                    )
-                  ],
+                          SizedBox(
+                            width: 20,
+                          ),
+                          //Favorites button here
+                          Image.asset(
+                            ImageContants.fav,
+                            height: 30,
+                            width: 30,
+                          ),
+                          //Favorites button end here
+                          SizedBox(
+                            width: 20,
+                          ),
+                          //Button for Add to Cart Items
+                          Container(
+                            height: 60,
+                            width: 60,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 10),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                addToCart(product, context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                primary: Color(ColorConstants.GreenColor),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
+                                elevation: 15.0,
+                              ),
+                              child: Image.asset(
+                                ImageContants.cart,
+                                height: 30,
+                                width: 30,
+                              ),
+                            ),
+                          )
+                          //Add to Cart Button Ends here
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),

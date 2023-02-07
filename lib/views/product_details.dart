@@ -20,6 +20,20 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    addToCart(Product product, BuildContext context) {
+      final snackBar = SnackBar(
+        content: Text("${product.name} added to Cart"),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            StringConstants.cartItems.remove(product);
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      StringConstants.cartItems.add(product);
+    }
+
     return Scaffold(
       body: Container(
         child: Stack(
@@ -178,19 +192,7 @@ class ProductDetails extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              final snackBar = SnackBar(
-                                content: Text(
-                                    "${product.name} cost of ${product.name} added to Cart"),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {
-                                    StringConstants.cartItems.remove(product);
-                                  },
-                                ),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                              StringConstants.cartItems.add(product);
+                              addToCart(product, context);
                             },
                             child: Container(
                               padding: EdgeInsets.all(15),

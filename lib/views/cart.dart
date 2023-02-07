@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
+import '../widgets/CartItemsWidget.dart';
+
 class CartView extends StatefulWidget {
   const CartView({super.key});
 
@@ -25,132 +27,70 @@ class _CartViewState extends State<CartView> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                HomeAppBar2(),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Your Bag",
-                    style: TextStyle(
-                      fontSize: 35,
-                      color: Color(ColorConstants.GreenColor),
-                      fontFamily: FontsConstants.Bold,
-                      fontWeight: FontWeight.bold,
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  HomeAppBar2(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Your Bag",
+                      style: TextStyle(
+                        fontSize: 35,
+                        color: Color(ColorConstants.GreenColor),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                ListView.builder(
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  itemCount: StringConstants.cartItems.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    var product = StringConstants.cartItems[index];
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(
-                            StringConstants.products[index],
-                            height: 80,
-                            width: 80,
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    product.name,
-                                    style: TextStyle(
-                                        color:
-                                            Color(ColorConstants.PrimaryColor),
-                                        fontSize: 18,
-                                        fontFamily: FontsConstants.Bold),
-                                  ),
-                                  Icon(
-                                    Icons.bookmark_outline,
-                                    color: Color(ColorConstants.GreenColor),
-                                  ),
-                                  Text(
-                                    "\$ ${product.price}",
-                                    style: TextStyle(
-                                        color:
-                                            Color(ColorConstants.PrimaryColor),
-                                        fontSize: 18,
-                                        fontFamily: FontsConstants.Bold),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    "Quanityty 1",
-                                    style: TextStyle(
-                                        color:
-                                            Color(ColorConstants.PrimaryColor),
-                                        fontSize: 18,
-                                        fontFamily: FontsConstants.Bold),
-                                  ),
-                                  Icon(
-                                    Icons.delete,
-                                    color: Color(ColorConstants.GreenColor),
-                                  ),
-                                ],
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Total",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Color(ColorConstants.PrimaryColor),
-                          fontFamily: FontsConstants.Bold,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "\$ ${StringConstants.total}",
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Color(ColorConstants.PrimaryColor),
-                          fontFamily: FontsConstants.Bold,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: 20,
                   ),
-                )
-              ],
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: StringConstants.cartItems.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var product = StringConstants.cartItems[index];
+                      return CartItemsWidget(product, index);
+                    },
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Total",
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Color(ColorConstants.PrimaryColor),
+                            fontFamily: FontsConstants.Bold,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "\$ ${StringConstants.total}",
+                          style: TextStyle(
+                            fontSize: 28,
+                            color: Color(ColorConstants.PrimaryColor),
+                            fontFamily: FontsConstants.Bold,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
