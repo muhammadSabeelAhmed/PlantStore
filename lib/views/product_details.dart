@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseapp/models/Product.dart';
 import 'package:firebaseapp/utils/constants.dart';
 import 'package:firebaseapp/views/cart.dart';
@@ -20,7 +21,13 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    addToCart(Product product, BuildContext context) {
+    addToCart(Product product, BuildContext context) async {
+      await FirebaseFirestore.instance.collection('cart').add({
+        "name": "${product.name}",
+        "price": "${product.price}",
+        "desc": "${product.description}",
+        "rating": "${product.rating}"
+      });
       final snackBar = SnackBar(
         content: Text("${product.name} added to Cart"),
         action: SnackBarAction(
